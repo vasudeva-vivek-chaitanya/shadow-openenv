@@ -1,0 +1,19 @@
+name: shadow-openenv
+entrypoint: app.main:app
+
+tasks:
+  - easy
+  - medium
+  - hard
+
+observation_space:
+  code: string
+  errors: list
+  tests_passed: boolean
+  task_id: string
+
+action_space:
+  action_type: string
+
+reward:
+  type: float
