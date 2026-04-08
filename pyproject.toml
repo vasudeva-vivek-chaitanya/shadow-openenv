@@ -1,0 +1,16 @@
+[project]
+name = "shadow-openenv"
+version = "0.1.0"
+description = "Shadow OpenEnv environment for AI coding assistance"
+authors = [
+    {name = "Vivek", email = "vivekvicky9191@gmail.com"}
+]
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "pydantic",
+    "openai"
+]
+
+[tool.openenv]
+entrypoint = "app.main:app"
