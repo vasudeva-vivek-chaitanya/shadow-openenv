@@ -1,5 +1,6 @@
 import ast
 
+
 def safe_exec(code, func_name, test_input):
     try:
         local_env = {}
@@ -13,6 +14,7 @@ def safe_exec(code, func_name, test_input):
     except:
         return None
 
+
 def extract_function_name(code):
     try:
         tree = ast.parse(code)
@@ -22,12 +24,16 @@ def extract_function_name(code):
     except:
         return None
 
+
 def compute_complexity(code):
     try:
         tree = ast.parse(code)
-        return sum(1 for n in ast.walk(tree) if isinstance(n, (ast.For, ast.While, ast.If)))
+        return sum(
+            1 for n in ast.walk(tree) if isinstance(n, (ast.For, ast.While, ast.If))
+        )
     except:
         return 999
+
 
 def grade(task_id, code, task):
     score = 0.0
@@ -35,7 +41,7 @@ def grade(task_id, code, task):
         ast.parse(code)
         score += 0.2
     except:
-        return 0.0
+        return 0.01
 
     if "test_input" in task:
         fname = extract_function_name(code)
@@ -46,4 +52,9 @@ def grade(task_id, code, task):
     if task_id == "hard" and compute_complexity(code) <= 1:
         score += 0.3
 
-    return min(score, 1.0)
+    # enforce (0,1)
+    if score <= 0:
+        return 0.01
+    elif score >= 1:
+        return 0.99
+    return score
