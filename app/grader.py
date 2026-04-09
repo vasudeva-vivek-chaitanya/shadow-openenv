@@ -53,8 +53,5 @@ def grade(task_id, code, task):
         score += 0.3
 
     # enforce (0,1)
-    if score <= 0:
-        return 0.01
-    elif score >= 1:
-        return 0.99
+    score = max(0.01, min(score, 0.99))
     return score

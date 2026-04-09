@@ -96,17 +96,12 @@ def run_task(task):
 
         step += 1
 
-    # score normalization [0,1]
-    total_reward = sum(rewards)
-    max_possible = MAX_STEPS * 10  # approximate upper bound
-    raw_score = total_reward / max_possible
+    score = env.prev_score
 
-    if raw_score <= 0:
+    if score <= 0:
         score = 0.01
-    elif raw_score >= 1:
+    elif score >= 1:
         score = 0.99
-    else:
-        score = raw_score
 
     success = state.tests_passed
 
