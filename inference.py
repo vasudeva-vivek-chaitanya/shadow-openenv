@@ -102,9 +102,9 @@ def run_task(task):
     raw_score = total_reward / max_possible
 
     if raw_score <= 0:
-        score = 0
+        score = 0.01
     elif raw_score >= 1:
-        score = 1
+        score = 0.99
     else:
         score = raw_score
 

@@ -3,6 +3,7 @@ from app.models import Observation, Reward
 from app.tasks import TASKS
 from app.grader import grade
 
+
 class ShadowEnv:
 
     def __init__(self):
@@ -50,7 +51,7 @@ class ShadowEnv:
             reward -= 2
 
         self.prev_score = score
-        done = score == 1.0 or self.steps >= 15
+        done = score >= 0.99 or self.steps >= 15
 
         return self._obs(), Reward(value=reward), done, {}
 
@@ -64,6 +65,6 @@ class ShadowEnv:
         return Observation(
             code=self.code,
             errors=errors,
-            tests_passed=(len(errors)==0 and "return" in self.code),
-            task_id=self.task_id
+            tests_passed=(len(errors) == 0 and "return" in self.code),
+            task_id=self.task_id,
         )
